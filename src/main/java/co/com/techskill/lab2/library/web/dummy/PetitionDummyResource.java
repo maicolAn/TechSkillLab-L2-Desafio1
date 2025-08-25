@@ -26,4 +26,11 @@ public class PetitionDummyResource {
         return petitionService.dummyFindById(petitionDTO.getPetitionId())
                 .map(ResponseEntity::ok);
     }
+
+    @GetMapping("/reto1")
+    public Flux<String> runReto1() {
+        return petitionService.priorityReto1()
+                .doOnSubscribe(s -> System.out.println("=== [Reto 1] Inicio ==="))
+                .doOnComplete(() -> System.out.println("=== [Reto 1] Fin ==="));
+    }
 }
